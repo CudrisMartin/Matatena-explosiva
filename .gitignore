@@ -3,7 +3,8 @@
 
 ### Python ###
 # Byte-compiled / optimized / DLL files
-__pycache__/
+test.py
+/__pycache__/
 *.py[cod]
 *$py.class
 
@@ -126,6 +127,7 @@ celerybeat.pid
 # Environments
 .env
 .venv
+avenv/
 env/
 venv/
 ENV/

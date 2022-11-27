@@ -1,5 +1,4 @@
 import pygame, sys
-import random, os
 from fichas import Token
 
 
@@ -69,9 +68,6 @@ while True:
                 sprites.remove(i)
                 count += 1
                 print("si")
-                break
-
-        
 
     sprites.update()
     display.fill('purple')

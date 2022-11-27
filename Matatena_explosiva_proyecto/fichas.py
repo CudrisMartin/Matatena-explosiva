@@ -1,6 +1,5 @@
 import pygame as pg
 import random
-# from main import ANCHO, ALTO
 
 ANCHO = 800
 ALTO = 600
@@ -18,7 +17,7 @@ class Token(pg.sprite.Sprite):
         self.rect.y = random.randrange(ALTO - self.rect.height)
 
     def update(self):
-	# Actualiza esto cada vuelta de bucle.
+	# Actualiza 
         if self.rect.left < 0:
             self.rect.left = 0
         
@@ -29,12 +28,4 @@ class Token(pg.sprite.Sprite):
             self.rect.bottom = ALTO
 
         if self.rect.top < ALTO//2 + 50:
-            self.rect.top = ALTO//2 + 50
-
-    
-        
-
-        
-        
-
-            
+            self.rect.top = ALTO//2 + 50        

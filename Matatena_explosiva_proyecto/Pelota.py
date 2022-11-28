@@ -27,4 +27,5 @@ for event in pygame.event.get():
             pelota.bottom = (ALTO/2)
                         
           if gameover == True:
-           break
+            pelota = sprites[1].convert()
+            break

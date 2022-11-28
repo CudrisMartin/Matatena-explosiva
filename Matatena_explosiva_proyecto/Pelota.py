@@ -5,20 +5,26 @@ sprites = [
     pygame.image.load('Sprites\Pelota\Pelota explotada.png')
 ]
 
+ANCHO = 800
+ALTO = 600
 pelota = sprites[0].convert()
 
-if event.type == pygame.MOUSEBUTTONDOWN:
-        if event.button == pygame.BUTTON_LEFT:
-         if true:
-          if pelota.bottom > suelo:
+for event in pygame.event.get():
+        if event.type == pygame.MOUSEBUTTONDOWN:
+                
+         if event.button == pygame.BUTTON_LEFT:
+          while gameover == False:
+                                
+           if pelota.bottom > ALTO:
             pelota.move_ip(0,5)
-          elif pelota.bottom < suelo:
-            pelota.bottom = suelo
-      
-      if pelota == suelo:
-        pelota.bottom < center:
-        pelota.move_ip(0,-4)
-      elif pelota.bottom > center:
-        pelota.bottom = center
-        If perdiste == true:
-           Break
+           elif pelota.bottom < ALTO:
+            pelota.bottom = ALTO
+                                
+           if pelota == ALTO:
+            pelota.bottom < (ALTO/2)
+            pelota.move_ip(0,-4)
+           elif pelota.bottom > (ALTO/2):
+            pelota.bottom = (ALTO/2)
+                        
+          if gameover == True:
+           break

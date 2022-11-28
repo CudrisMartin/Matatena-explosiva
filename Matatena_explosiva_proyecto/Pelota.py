@@ -1,4 +1,5 @@
 import pygame
+from main import gameover
 
 sprites = [
     pygame.image.load('Sprites\Pelota\Pelota.png'),

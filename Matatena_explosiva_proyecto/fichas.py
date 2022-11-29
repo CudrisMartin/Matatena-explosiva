@@ -10,7 +10,7 @@ class Token(pg.sprite.Sprite):
         super().__init__()
         self.fichas_png = ["\Ficha Amarilla.png", "\Ficha Azul.png", "\Ficha Morada.png", "\Ficha Rosada.png", "\Ficha Verde.png"]
         self.image = pg.image.load("Sprites\Fichas"+random.choice(self.fichas_png)).convert()
-        self.image = pg.transform.scale(self.image, (50, 50))
+        self.image = pg.transform.scale(self.image, (20, 20))
         self.image.set_colorkey("white")
         self.rect = self.image.get_rect()
         self.rect.x = random.randrange(ANCHO - self.rect.width)

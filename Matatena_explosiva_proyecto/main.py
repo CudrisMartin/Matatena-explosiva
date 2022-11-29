@@ -39,6 +39,7 @@ def crear_fichas():
         ficha = Token()
         fichas.add(ficha)
 
+crear_fichas()
     
 while True:
     for event in pygame.event.get():
@@ -61,19 +62,24 @@ while True:
     if bottom[0]:
         if ini == False:
             ini == True
-            crear_fichas()
+            # crear_fichas()
             iniciar_j()
                 
-                
-        else:
-            for i in fichas:
-                if i.rect.collidepoint(*pygame.mouse.get_pos()):
-                    fichas.remove(i)
-                    count += 1
+              
+        for i in fichas:
+            if i.rect.collidepoint(*pygame.mouse.get_pos()):
+                fichas.remove(i)
+                count += 1
+            
 
     if count == dificultad:
+        print(dificultad)
+        count = 0
         dificultad += 1
+        fichas.empty()
         crear_fichas()
+
+    
 
     fichas.update()
     pelota.update()
@@ -82,3 +88,5 @@ while True:
     pelota.draw(display)
 
     pygame.display.update()
+
+    

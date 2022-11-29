@@ -6,12 +6,17 @@ YI = 400
 correr = False
 sig_ronda = False
 click = False
+yi = YI
 
 rebotes = 0
 
 def iniciar_j():
-  global correr
+  global correr, rebotes,click, sig_ronda
+  rebotes = 0
   correr = True
+  sig_ronda = False
+  click = False
+  yi = YI
 
 def rev_correr():
   global correr
@@ -31,6 +36,7 @@ def res_click():
 
 #Clase Pelota
 class Pelota(pygame.sprite.Sprite):
+  global yi
   sprites = [ #Sprites de la pelota
       pygame.image.load('Sprites\pelota\Pelota.png'),
       pygame.image.load('Sprites\pelota\Pelota explotada.png')
@@ -41,7 +47,6 @@ class Pelota(pygame.sprite.Sprite):
   ANCHO = 300 #Alto y ancho de la ventana
   ALTO = 512
 
-  yi = YI
   image = pygame.transform.scale(sprites[0], (50, 50))
 
   #Aceleración y velocidad inicial de la pelota
@@ -49,16 +54,17 @@ class Pelota(pygame.sprite.Sprite):
   vi = 80   #Velocidad proporcional velocidad de subida 
 
   def __init__(self) -> None:
+    global yi
     super().__init__()
     self.image = pygame.image.load("Sprites\pelota\Pelota.png").convert()
     self.image = pygame.transform.scale(self.image,(40,40))
     self.image.set_colorkey("white")
     self.rect = self.image.get_rect()
     self.rect.x = 150
-    self.rect.y = self.yi
+    self.rect.y = yi
 
   def update(self):
-    global correr, sig_ronda, click, rebotes
+    global correr, sig_ronda, click, rebotes, yi
 
     if rebotes == 0:
       self.image = pygame.image.load("Sprites\pelota\Pelota.png").convert()
@@ -75,7 +81,7 @@ class Pelota(pygame.sprite.Sprite):
       if self.rect.collidepoint(*pygame.mouse.get_pos()):
         if sig_ronda == True: #Si se cliceka y se puede seguir a la siguiente ronda
           click = True
-          self.yi = self.rect.y
+          yi = self.rect.y
           self.tiempo = 0
           rebotes = 0
           SFXrebote = pygame.mixer.Sound("Sonidos\Rebotar.ogg")
@@ -95,10 +101,11 @@ class Pelota(pygame.sprite.Sprite):
         SFXrebotar = pygame.mixer.Sound("Sonidos\Rebote.ogg")
         pygame.mixer.Sound.play(SFXrebotar)
         self.tiempo = 0                #Reiniciar tiempo reinicia rebote
-        self.yi = YI                   #Es necesario cambiar la posición inicial relativa para evitar saltos
+                          #Es necesario cambiar la posición inicial relativa para evitar saltos
         rebotes += 1
+        yi = YI 
 
-    self.rect.y = self.yi + dy         #Cambio en la posición de la pelota
+    self.rect.y = yi + dy         #Cambio en la posición de la pelota
     
     if rebotes >= 2:
       correr = False

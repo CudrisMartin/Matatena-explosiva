@@ -21,7 +21,7 @@ Clock = pygame.time.Clock()
 #Estados#
 gameover = False
 play = False
-dificultad = 1
+dificultad = 0
 
 pygame.init()
 
@@ -48,8 +48,6 @@ def MostrarTexto(pantalla, fuente, texto, color, dimensiones, x , y):
     rectangulo= superficie.get_rect()
     rectangulo.center=(x , y)
     pantalla.blit(superficie, rectangulo)
-
-crear_fichas()
     
 while True:
     for event in pygame.event.get():
@@ -71,10 +69,11 @@ while True:
     bottom = pygame.mouse.get_pressed()
     if bottom[0]:
         if ini == False:
-            ini = True
-            # crear_fichas()
             iniciar_j()
-                
+            dificultad = 0
+            count = 0
+            ini = True
+            print(str(dificultad)+str(count))
               
         for i in fichas:
             if i.rect.collidepoint(*pygame.mouse.get_pos()):

@@ -1,13 +1,16 @@
 import pygame, sys
 from fichas import Token
 from Pelotas import Pelota
-from Pelotas import iniciar_j
+from Pelotas import iniciar_j, pasar_ronda, rev_click, res_click, rev_correr
 
 ###VARIABLES GLOBALES###
 ##RECURSOS##
-fondo =  pygame.image.load('Matatena_explosiva_proyecto\Sprites\Fondo.jpg')
+fondo =  pygame.image.load('Sprites/fondos/fondo.jpg')
+p_inicial = pygame.image.load('Sprites/fondos/Pantalla inicio.jpg')
 pygame.display.set_caption("Matatena explosiva")
+consolas = 'Matatena_explosiva_proyecto\PressStart2P-Regular.ttf'
 #Colores#
+Blanco = (255,255,255)
 #Resolución#
 ANCHO = 300
 ALTO = 512
@@ -39,6 +42,13 @@ def crear_fichas():
         ficha = Token()
         fichas.add(ficha)
 
+def MostrarTexto(pantalla, fuente, texto, color, dimensiones, x , y):
+    letra= pygame.font.Font(fuente, dimensiones)
+    superficie= letra.render(texto, False, color)
+    rectangulo= superficie.get_rect()
+    rectangulo.center=(x , y)
+    pantalla.blit(superficie, rectangulo)
+
 crear_fichas()
     
 while True:
@@ -61,7 +71,7 @@ while True:
     bottom = pygame.mouse.get_pressed()
     if bottom[0]:
         if ini == False:
-            ini == True
+            ini = True
             # crear_fichas()
             iniciar_j()
                 
@@ -73,19 +83,33 @@ while True:
             
 
     if count == dificultad:
-        print(dificultad)
-        count = 0
-        dificultad += 1
-        fichas.empty()
-        crear_fichas()
+        
+        pasar_ronda(True) #comunica que se puede pasar a la siguiente ronda
+        
+        if rev_click():
+            count = 0 
+            dificultad += 1 
+            fichas.empty()
+            crear_fichas()
+            pasar_ronda(False) #]Reinicia variable de pasar de ronda y click de la pelota
+            res_click()        #]
 
-    
+    if not rev_correr() and ini == True:
+        ini = False
 
     fichas.update()
     pelota.update()
-    display.blit(fondo,(0,0))
+    if ini == True:
+        display.blit(fondo,(0,0))
+        MostrarTexto(display,consolas,f"Objetivo: {dificultad}",Blanco,14,80,15)
+    else:
+        display.blit(p_inicial,(0,0))
+        MostrarTexto(display,consolas,f"Click para comenzar",Blanco,14,150,256)
+    
     fichas.draw(display)
     pelota.draw(display)
+
+    
 
     pygame.display.update()
 

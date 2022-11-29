@@ -35,7 +35,7 @@ class Pelota(pygame.sprite.Sprite):
       pygame.image.load('Sprites\pelota\Pelota.png'),
       pygame.image.load('Sprites\pelota\Pelota explotada.png')
   ]
-
+  
   tiempo = 0
 
   ANCHO = 300 #Alto y ancho de la ventana
@@ -77,21 +77,26 @@ class Pelota(pygame.sprite.Sprite):
           click = True
           self.yi = self.rect.y
           self.tiempo = 0
+          rebotes = 0
+          SFXrebote = pygame.mixer.Sound("Sonidos\Rebotar.ogg")
+          pygame.mixer.Sound.play(SFXrebote)
     
     t = self.tiempo/1000 #Tiempo expresado en medidad más simples
     dy = 0               #inicialización variable de distancia
     
     if correr == True:
-      self.tiempo += 6 #Velocidad del tiempo, si el juego corre muy lento aumentar este parametro
+      self.tiempo += 10 #Velocidad del tiempo, si el juego corre muy lento aumentar este parametro
 
       t2 = pow(t,2)
       dy = -(self.vi* t)
       dy += (self.a*t2)*0.5
       dy = int(dy)
       if self.rect.y == YI and dy > 0: #Si la posición es igual a la inicial absoluta y la distancia es negativa
+        SFXrebotar = pygame.mixer.Sound("Sonidos\Rebote.ogg")
+        pygame.mixer.Sound.play(SFXrebotar)
         self.tiempo = 0                #Reiniciar tiempo reinicia rebote
         self.yi = YI                   #Es necesario cambiar la posición inicial relativa para evitar saltos
-        rebotes += 1 
+        rebotes += 1
 
     self.rect.y = self.yi + dy         #Cambio en la posición de la pelota
     

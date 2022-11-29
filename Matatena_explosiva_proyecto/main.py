@@ -80,6 +80,8 @@ while True:
             if i.rect.collidepoint(*pygame.mouse.get_pos()):
                 fichas.remove(i)
                 count += 1
+                agarrar = pygame.mixer.Sound("Sonidos\Agarrar_ficha.ogg")
+                pygame.mixer.Sound.play(agarrar)
             
 
     if count == dificultad:
@@ -102,14 +104,11 @@ while True:
     if ini == True:
         display.blit(fondo,(0,0))
         MostrarTexto(display,consolas,f"Objetivo: {dificultad}",Blanco,14,80,15)
+        fichas.draw(display)
+        pelota.draw(display)
     else:
         display.blit(p_inicial,(0,0))
-        MostrarTexto(display,consolas,f"Click para comenzar",Blanco,14,150,256)
-    
-    fichas.draw(display)
-    pelota.draw(display)
-
-    
+        MostrarTexto(display,consolas,f"Click para comenzar",Blanco,14,150,256)   
 
     pygame.display.update()
 

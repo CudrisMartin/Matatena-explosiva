@@ -1,7 +1,7 @@
 import pygame, sys
 from fichas import Token
-from Pelotas import Pelota
-from Pelotas import iniciar_j, pasar_ronda, rev_click, res_click, rev_correr
+from Pelotas import Pelota, iniciar_j, pasar_ronda, rev_click, res_click, rev_correr, num_rebotes
+from Explosion import Explosion, explotar
 
 ###VARIABLES GLOBALES###
 ##RECURSOS##
@@ -34,8 +34,12 @@ fichas= pygame.sprite.Group()
 pelota = pygame.sprite.Group()
 pelota.add(Pelota())
 
+explosion = pygame.sprite.Group()
+explosion.add(Explosion())
+
 count = 0
 ini = False
+reb = 0
 
 def crear_fichas():
     for i in range(dificultad):
@@ -73,7 +77,6 @@ while True:
             dificultad = 0
             count = 0
             ini = True
-            print(str(dificultad)+str(count))
               
         for i in fichas:
             if i.rect.collidepoint(*pygame.mouse.get_pos()):
@@ -81,7 +84,6 @@ while True:
                 count += 1
                 agarrar = pygame.mixer.Sound("Sonidos\Agarrar_ficha.ogg")
                 pygame.mixer.Sound.play(agarrar)
-            
 
     if count == dificultad:
         
@@ -94,17 +96,28 @@ while True:
             crear_fichas()
             pasar_ronda(False) #]Reinicia variable de pasar de ronda y click de la pelota
             res_click()        #]
+            
+
+    reb = num_rebotes()
+
+    if reb == 1:
+        #sfx = pygame.mixer.Sound("Sonidos\Explosion.ogg")
+        #pygame.mixer.Sound.play(sfx)
+        explotar()
+        
 
     if not rev_correr() and ini == True:
         ini = False
 
     fichas.update()
     pelota.update()
+    explosion.update()
     if ini == True:
         display.blit(fondo,(0,0))
         MostrarTexto(display,consolas,f"Objetivo: {dificultad}",Blanco,14,80,15)
         fichas.draw(display)
         pelota.draw(display)
+        explosion.draw(display)
     else:
         display.blit(p_inicial,(0,0))
         MostrarTexto(display,consolas,f"Click para comenzar",Blanco,14,150,256)   

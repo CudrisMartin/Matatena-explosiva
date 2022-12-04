@@ -34,6 +34,10 @@ def res_click():
   global click
   click = False
 
+def num_rebotes():
+  global rebotes
+  return rebotes
+
 #Clase Pelota
 class Pelota(pygame.sprite.Sprite):
   global yi

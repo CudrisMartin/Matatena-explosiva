@@ -46,6 +46,7 @@ def crear_fichas():
         ficha = Token()
         fichas.add(ficha)
 
+
 def MostrarTexto(pantalla, fuente, texto, color, dimensiones, x , y):
     letra= pygame.font.Font(fuente, dimensiones)
     superficie= letra.render(texto, False, color)
@@ -53,6 +54,7 @@ def MostrarTexto(pantalla, fuente, texto, color, dimensiones, x , y):
     rectangulo.center=(x , y)
     pantalla.blit(superficie, rectangulo)
     
+
 while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -82,8 +84,8 @@ while True:
             if i.rect.collidepoint(*pygame.mouse.get_pos()):
                 fichas.remove(i)
                 count += 1
-                agarrar = pygame.mixer.Sound("Sonidos\Agarrar_ficha.ogg")
-                pygame.mixer.Sound.play(agarrar)
+                # agarrar = pygame.mixer.Sound("Sonidos\Agarrar_ficha.ogg")
+                # pygame.mixer.Sound.play(agarrar)
 
     if count == dificultad:
         
@@ -100,7 +102,16 @@ while True:
 
     reb = num_rebotes()
 
+    # if explosion[0].rect.c
+
+
     if reb == 1:
+        for i in explosion:
+            for j in fichas:
+                if i.rect.colliderect(j):
+                    fichas.remove(j)
+                    count += 1
+        
         #sfx = pygame.mixer.Sound("Sonidos\Explosion.ogg")
         #pygame.mixer.Sound.play(sfx)
         explotar()
@@ -124,4 +135,3 @@ while True:
 
     pygame.display.update()
 
-    

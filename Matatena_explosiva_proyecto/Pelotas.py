@@ -60,8 +60,8 @@ class Pelota(pygame.sprite.Sprite):
     self.image = pygame.transform.scale(self.image,(40,40))
     self.image.set_colorkey("white")
     self.rect = self.image.get_rect()
-    self.rect.x = 150
-    self.rect.y = yi
+    self.rect.x = 150 - (self.image.get_width()/2)
+    self.rect.y = yi - (self.image.get_height()/2)
 
   def update(self):
     global correr, sig_ronda, click, rebotes, yi

@@ -88,8 +88,8 @@ class Pelota(pygame.sprite.Sprite):
           yi = self.rect.y
           self.tiempo = 0
           rebotes = 0
-          # SFXrebote = pygame.mixer.Sound("Sonidos\Rebotar.ogg")
-          # pygame.mixer.Sound.play(SFXrebote)
+          SFXrebote = pygame.mixer.Sound("Sonidos\Rebotar.ogg")
+          pygame.mixer.Sound.play(SFXrebote)
     
     t = self.tiempo/1000 #Tiempo expresado en medidad más simples
     dy = 0               #inicialización variable de distancia
@@ -102,8 +102,8 @@ class Pelota(pygame.sprite.Sprite):
       dy += (self.a*t2)*0.5
       dy = int(dy)
       if self.rect.y == YI and dy > 0: #Si la posición es igual a la inicial absoluta y la distancia es negativa
-        # SFXrebotar = pygame.mixer.Sound("Sonidos\Rebote.ogg")
-        # pygame.mixer.Sound.play(SFXrebotar)
+        SFXrebotar = pygame.mixer.Sound("Sonidos\Rebote.ogg")
+        pygame.mixer.Sound.play(SFXrebotar)
         self.tiempo = 0                #Reiniciar tiempo reinicia rebote
                           #Es necesario cambiar la posición inicial relativa para evitar saltos
         rebotes += 1

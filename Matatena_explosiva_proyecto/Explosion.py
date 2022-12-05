@@ -42,7 +42,7 @@ class Explosion(pygame.sprite.Sprite):
                 frame = math.floor(self.tiempo/100)
 
                 self.image = self.sprites[frame].convert()
-                self.image = pygame.transform.scale(self.image, (180, 240))
+                self.image = pygame.transform.scale(self.image, (140, 157))
                 self.image.set_colorkey("white")
                 self.rect = self.image.get_rect()
                 self.rect.x = 150 -(self.image.get_width()/2)
